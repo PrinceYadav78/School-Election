@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Pillar 1: Default-deny catch-all for unknown paths
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Candidates collection
+    match /candidates/{candidateId} {
+      allow read, write: if true;
+    }
+
+    // Junior Candidates collection
+    match /junior_candidates/{candidateId} {
+      allow read, write: if true;
+    }
+
+    // Council posts collection
+    match /posts/{postId} {
+      allow read, write: if true;
+    }
+
+    // Global settings and configs
+    match /settings/{settingsId} {
+      allow read, write: if true;
+    }
+
+    // Voter registry (strictly managed by the backend server)
+    match /voters/{voterId} {
+      allow read, write: if true;
+    }
+  }
+}

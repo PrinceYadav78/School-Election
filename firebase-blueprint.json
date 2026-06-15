@@ -1,0 +1,74 @@
+{
+  "entities": {
+    "Voter": {
+      "title": "Voter",
+      "description": "Student voter record",
+      "type": "object",
+      "properties": {
+        "admissionNo": { "type": "string", "description": "Student Admission ID (e.g., SD-1001)" },
+        "pin": { "type": "string", "description": "SHA-256 secure hashed PIN value" },
+        "hasVoted": { "type": "boolean", "description": "Whether the student has voted" },
+        "votedAt": { "type": "string", "description": "ISO timestamp of when the vote was submitted" }
+      },
+      "required": ["admissionNo", "pin", "hasVoted"]
+    },
+    "Candidate": {
+      "title": "Candidate",
+      "description": "Election candidate",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Candidate primary ID" },
+        "fullName": { "type": "string", "description": "Candidate full name" },
+        "house": { "type": "string", "description": "House designation" },
+        "post": { "type": "string", "description": "Position ID" },
+        "photo": { "type": "string", "description": "Profile picture URL or raw SVG data stream" },
+        "motto": { "type": "string", "description": "Election manifesto motto" },
+        "votes": { "type": "integer", "description": "Number of received ballots" }
+      },
+      "required": ["id", "fullName", "house", "post", "votes"]
+    },
+    "Post": {
+      "title": "Post",
+      "description": "Student council representation designation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Post slug identifier" },
+        "title": { "type": "string", "description": "Title name" },
+        "description": { "type": "string", "description": "Brief description of the role duties" }
+      },
+      "required": ["id", "title"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Global settings for the election",
+      "type": "object",
+      "properties": {
+        "isOpen": { "type": "boolean", "description": "Whether the general election is open to voters" },
+        "modEnabled": { "type": "boolean", "description": "Whether demographic split algorithms are enabled" }
+      },
+      "required": ["isOpen", "modEnabled"]
+    }
+  },
+  "firestore": {
+    "/voters/{voterId}": {
+      "schema": "Voter",
+      "description": "Registry of student credentials and voting states"
+    },
+    "/candidates/{candidateId}": {
+      "schema": "Candidate",
+      "description": "Details and tallies of candidate running in the election"
+    },
+    "/junior_candidates/{candidateId}": {
+      "schema": "Candidate",
+      "description": "Details and tallies of junior candidates running in the election"
+    },
+    "/posts/{postId}": {
+      "schema": "Post",
+      "description": "Pre-configured leadership positions"
+    },
+    "/settings/{settingsId}": {
+      "schema": "Settings",
+      "description": "Global system configurations"
+    }
+  }
+}

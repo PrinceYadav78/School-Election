@@ -1,0 +1,6 @@
+{
+  "name": "School Election Portal",
+  "description": "A secure, high-performance web election system for candidate management and student voting featuring a minimalist, 3D futuristic UI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
